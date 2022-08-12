@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
-import { LoginPage } from "./pages/LoginPage";
+import { AppRoutes } from "./routs/AppRouts";
+
 
 export const App = () => {
   return (
     <div>
-      <LoginPage />
+      <AppRoutes />
     </div>
   );
 };
