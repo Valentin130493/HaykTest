@@ -1,8 +1,10 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { routs } from "../../routs/сonstants/сonstants";
+
+import "./Registration.css";
 
 interface IFormInput {
   Email: string;
@@ -14,25 +16,32 @@ export const Registration = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        id="outlined-basic"
-        label="Email"
-        variant="outlined"
-        {...register("Email", { required: true, maxLength: 20 })}
-      />
-      <TextField
-        id="outlined-basic"
-        label="Password"
-        variant="outlined"
-        {...register("Password", { pattern: /^[A-Za-z]+$/i })}
-      />
+    <form className="form-registration" onSubmit={handleSubmit(onSubmit)}>
+      <h1>Registration</h1>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <TextField
+          margin="normal"
+          id="outlined-basic"
+          label="Email"
+          variant="outlined"
+          {...register("Email", { required: true, maxLength: 20 })}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Password"
+          variant="outlined"
+          {...register("Password", { pattern: /^[A-Za-z]+$/i })}
+        />
+      </Box>
+      <Link className="link" to={routs.login}>
+        Back to login
+      </Link>
       <button type="submit">Submit</button>
-      <Link to={routs.login}>login</Link>
-      {/*<label>First Name</label>*/}
-      {/*<input {...register("firstName")} />*/}
-      {/*<label>Gender Selection</label>*/}
-      {/*<input type="submit" />*/}
     </form>
   );
 };
