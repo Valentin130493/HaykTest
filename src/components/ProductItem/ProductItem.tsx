@@ -1,5 +1,5 @@
 import React from "react";
-import { cutDescription } from "../../helpers/cutString";
+import { cutDescription } from "../../utils/cutString";
 import { Modal, Typography } from "@mui/material";
 
 
