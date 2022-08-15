@@ -3,7 +3,7 @@ import { Box, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { routs } from "../../constants/routs";
 import { SubmitHandler, useForm } from "react-hook-form";
-import {  GoogleLoginButton } from "../GoogleLogin/GoogleLogin";
+
 
 
 interface IFormInput {
@@ -43,7 +43,6 @@ export const LogIn = () => {
       <Link to={routs.registration}>login</Link>
       <button type="submit">Submit</button>
     </form>
-      <GoogleLoginButton />
     </>
   );
 };

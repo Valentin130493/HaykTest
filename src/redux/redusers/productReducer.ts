@@ -6,7 +6,7 @@ interface HoursItem {
   opens_at:  string,
 }
 
-export interface ProductItem {
+export interface productItem {
   address: string,
   description: string,
   hours: {
@@ -30,8 +30,8 @@ export interface ProductItem {
 interface ProductsState {
   loading: boolean,
   error: any,
-  products: Array<ProductItem>,
-  filteredProducts: Array<ProductItem>,
+  products: Array<productItem>,
+  filteredProducts: Array<productItem>,
   productTypes: Array<string>,
   filters: Array<string>
 }
@@ -50,7 +50,7 @@ export default function productReducer(state = initialState, action:{type:string
     case GET_PRODUCT_REQUEST:
       return {...state, loading: true}
     case GET_PRODUCT_SUCCESS:
-      const typeList = action.payload.map((element: ProductItem) => element.type);
+      const typeList = action.payload.map((element: productItem) => element.type);
       return {...state,
         loading: false,
         products: action.payload,

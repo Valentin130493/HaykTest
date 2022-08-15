@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useContext} from "react";
 import { cutDescription } from "../../utils/cutString";
 import { Modal, Typography } from "@mui/material";
+import {ModalContext} from "../../context/ModalContext";
 
 
 interface ProductItemProps {
@@ -30,12 +31,11 @@ interface WorkHours {
 }
 
 export const ProductItem:React.FC<ProductItemProps> = ({ id,hours,description,logo,review,name,phone_number,uid,type,address}) => {
-
-
+   const {open,modal,close} = useContext(ModalContext)
 
   return (
     <>
-      <div className={"product-block"} >
+      <div className={"product-block"} onClick={open}>
         <h4  className={"product-block-h4"}>{id}</h4>
         <img className={"product-block-img"} src={logo} alt={name}/>
         <h3 className={"product-block-h3"}>{name}</h3>
@@ -43,8 +43,8 @@ export const ProductItem:React.FC<ProductItemProps> = ({ id,hours,description,lo
         <h4 className={"product-block-h4"}>{cutDescription(description, 150)}</h4>
       </div>
       <Modal
-        open={false}
-        // onClose={}
+        open={modal}
+        onClose={close}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Typography>
