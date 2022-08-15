@@ -1,12 +1,13 @@
 import React from "react";
-import { Registration } from "../components/Registration/Registration";
+import { LogIn } from "../../components/LogIn/LogIn";
 
 import "./LoginPage.css";
+
 
 export const LoginPage = () => {
   return (
     <div className="wrapper">
-      <Registration />
+      <LogIn />
     </div>
   );
 };
