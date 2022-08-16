@@ -19,38 +19,39 @@ export const LogIn = () => {
     let navigate = useNavigate();
     const {register, handleSubmit} = useForm<IFormInput>();
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
+        console.log(data)
         dispatch(userLoginRequest(data));
         navigate(routs.home)
     }
 
     return (
         <div className={"wrapper"}>
-        <form className="form-login" onSubmit={handleSubmit(onSubmit)}>
-            <h1>Login</h1>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                }}
-            >
-                <TextField
-                    margin="normal"
-                    label="Email"
-                    id="outlined-basic"
-                    variant="outlined"
-                    {...register("email",{ required: true, maxLength: 20 })}
-                />
-                <TextField
-                    margin="normal"
-                    id="outlined-basic"
-                    label="Password"
-                    variant="outlined"
-                    {...register("password", { pattern: /^[A-Za-z]+$/i })}
-                />
-            </Box>
-            <Link className={"link"} to={routs.registration}>Registration</Link>
-            <button type="submit">Submit</button>
-        </form>
+            <form className="form-login" onSubmit={handleSubmit(onSubmit)}>
+                <h1>Login</h1>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
+                >
+                    <TextField
+                        margin="normal"
+                        label="Email"
+                        id="outlined-basic"
+                        variant="outlined"
+                        {...register("email")}
+                    />
+                    <TextField
+                        margin="normal"
+                        id="outlined-basic"
+                        label="Password"
+                        variant="outlined"
+                        {...register("password")}
+                    />
+                </Box>
+                <Link className={"link"} to={routs.registration}>Registration</Link>
+                <button type="submit">Submit</button>
+            </form>
         </div>
 
     );

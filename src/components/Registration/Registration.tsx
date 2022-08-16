@@ -30,13 +30,13 @@ export const Registration = () => {
                         id="outlined-basic"
                         label="Email"
                         variant="outlined"
-                        {...register("email", {required: true, maxLength: 20})}
+                        {...register("email")}
                     />
                     <TextField
                         id="outlined-basic"
                         label="Password"
                         variant="outlined"
-                        {...register("password", {pattern: /^[A-Za-z]+$/i})}
+                        {...register("password")}
                     />
                 </Box>
                 <Link className="link" to={routs.login}>

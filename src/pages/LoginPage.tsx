@@ -1,10 +1,10 @@
 import React from "react";
-import {LogIn} from "../../components/LogIn/LogIn";
+import {LogIn} from "../components/LogIn/LogIn";
 
 
 import {useLocation} from "react-router-dom";
-import {routs} from "../../constants/routs";
-import {Registration} from "../../components/Registration/Registration";
+import {routs} from "../constants/routs";
+import {Registration} from "../components/Registration/Registration";
 
 
 export const LoginPage = () => {
