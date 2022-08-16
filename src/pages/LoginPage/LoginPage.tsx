@@ -1,13 +1,17 @@
 import React from "react";
-import { LogIn } from "../../components/LogIn/LogIn";
+import {LogIn} from "../../components/LogIn/LogIn";
 
-import "./LoginPage.css";
+
+import {useLocation} from "react-router-dom";
+import {routs} from "../../constants/routs";
+import {Registration} from "../../components/Registration/Registration";
 
 
 export const LoginPage = () => {
-  return (
-    <div className="wrapper">
-      <LogIn />
-    </div>
-  );
+    const location = useLocation()
+    return (
+        <>
+            {location.pathname === routs.login ? <LogIn/> : <Registration/>}
+        </>
+    );
 };
