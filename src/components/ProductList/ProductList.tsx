@@ -5,9 +5,11 @@ import {productItem} from "../../redux/redusers/productReducer";
 
 
 export const ProductList = () => {
+
+
   // @ts-ignore
   const {products, filteredProducts} = useSelector((state) => state.products);
-
+  console.log(products,filteredProducts)
   return (
     <>
       {

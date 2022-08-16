@@ -16,10 +16,9 @@ interface IFormInput {
 
 export const LogIn = () => {
     const dispatch = useDispatch()
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const {register, handleSubmit} = useForm<IFormInput>();
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
-        console.log(data)
         dispatch(userLoginRequest(data));
         navigate(routs.home)
     }
@@ -42,7 +41,6 @@ export const LogIn = () => {
                         {...register("email")}
                     />
                     <TextField
-                        margin="normal"
                         id="outlined-basic"
                         label="Password"
                         variant="outlined"

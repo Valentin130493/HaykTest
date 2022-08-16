@@ -1,12 +1,12 @@
 import {call, put} from "redux-saga/effects";
-import {firebaseAuth, firebaseSignOut} from "../../../firebase/firebase";
-import {getProductFailure, getProductSuccess} from "../../actions/productActions";
+import {firebaseSignOut} from "../../../firebase/firebase";
+import {userLogOutSuccess, userLogOutFailure} from "../../actions/loginActions";
 
 export default function* logOut(): any {
     try {
-        const response = yield call(()=>firebaseSignOut());
-        yield put(getProductSuccess(response))
+        yield call(() => firebaseSignOut());
+        yield put(userLogOutSuccess())
     } catch (error) {
-        yield put(getProductFailure(error));
+        yield put(userLogOutFailure(error));
     }
 }

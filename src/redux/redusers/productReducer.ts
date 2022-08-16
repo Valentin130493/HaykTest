@@ -1,4 +1,9 @@
-import { GET_PRODUCT_FAILURE, GET_PRODUCT_REQUEST, GET_PRODUCT_SUCCESS } from "../actionTypes/productActionTypes";
+import {
+  GET_PRODUCT_FAILURE,
+  GET_PRODUCT_REQUEST,
+  GET_PRODUCT_SUCCESS,
+  SET_PRODUCTS
+} from "../actionTypes/productActionTypes";
 
 interface HoursItem {
   closes_at:  string,
@@ -45,7 +50,7 @@ const initialState: ProductsState = {
   filters: []
 }
 
-export default function productReducer(state = initialState, action:{type:string, payload:any}) {
+export default function productReducer(state = initialState, action:{type:string, payload:any}):ProductsState {
   switch (action.type) {
     case GET_PRODUCT_REQUEST:
       return {...state, loading: true}
@@ -62,6 +67,16 @@ export default function productReducer(state = initialState, action:{type:string
         loading: false,
         error: action.payload
       }
+    case SET_PRODUCTS:{
+      const indexProduct = state.filters.indexOf(action.payload.products)
+      return <ProductsState>{
+        ...state,
+        filters: state.filters.includes(action.payload.products) ? state.filters.splice(indexProduct, 1) : state.filters?.push(action.payload.products),
+
+      }
+    }
+
+
     default:
       return state
   }

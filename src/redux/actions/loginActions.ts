@@ -31,8 +31,9 @@ export const userLogOutFailure = (error: unknown) => ({
     payload: error
 });
 
-export const userRegisterRequest = () => ({
-    type: REGISTER_REQUEST
+export const userRegisterRequest = (data: {email:string, password:string}) => ({
+    type: REGISTER_REQUEST,
+    payload: data
 });
 
 export const userRegisterSuccess = () => ({

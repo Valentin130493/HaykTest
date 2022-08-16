@@ -1,8 +1,6 @@
-import { initializeApp } from "firebase/app";
+import {initializeApp} from "firebase/app";
 import {firebaseKey} from "../constants/firebaseKeys";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-
-
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
 
 
 interface FirebaseConfig {
@@ -27,6 +25,7 @@ const firebaseConfig: FirebaseConfig = {
 initializeApp(firebaseConfig)
 
 const auth = getAuth();
+
 
 export const firebaseAuth = (email: string, password: string,) => signInWithEmailAndPassword(auth, email, password);
 export const firebaseCreateUser = (email: string, password: string) => createUserWithEmailAndPassword(auth, email, password);
