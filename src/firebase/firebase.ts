@@ -2,7 +2,6 @@ import {initializeApp} from "firebase/app";
 import {firebaseKey} from "../constants/firebaseKeys";
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
 
-
 interface FirebaseConfig {
     apiKey: string,
     authDomain: string,
@@ -21,10 +20,8 @@ const firebaseConfig: FirebaseConfig = {
     appId: firebaseKey.API_KEY
 };
 
-
 initializeApp(firebaseConfig)
-
-const auth = getAuth();
+ const auth = getAuth();
 
 
 export const firebaseAuth = (email: string, password: string,) => signInWithEmailAndPassword(auth, email, password);

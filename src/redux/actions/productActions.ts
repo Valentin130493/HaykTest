@@ -1,17 +1,28 @@
-import {GET_PRODUCT_FAILURE, GET_PRODUCT_REQUEST, GET_PRODUCT_SUCCESS} from "../actionTypes/productActionTypes";
+import {ProductItemI} from "../../models/products";
+import {
+    FilteredProductAction,
+    GetProductAction,
+    GetProductFailureAction,
+    GetProductSuccessAction,
+    ProductActionTypes
+} from "../actionTypes/productActionTypes";
 
-
-export const getProductRequest = () => ({
-    type: GET_PRODUCT_REQUEST,
+export const getProduct = (): GetProductAction => ({
+    type: ProductActionTypes.GET_PRODUCT,
 });
 
-export const getProductSuccess = (payload: any) => ({
-    type: GET_PRODUCT_SUCCESS,
-    payload
+export const getProductSuccess = (data: Array<ProductItemI>): GetProductSuccessAction => ({
+    type: ProductActionTypes.GET_PRODUCT_SUCCESS,
+    payload: data
 });
 
-export const getProductFailure = (payload: unknown) => ({
-    type: GET_PRODUCT_FAILURE,
-    payload
+export const getProductFailure = ():GetProductFailureAction => ({
+    type: ProductActionTypes.GET_PRODUCT_FAILURE,
 });
+
+export const FilteredProduct = (data:{product: string}):FilteredProductAction => ({
+    type: ProductActionTypes.FILTERED_PRODUCT,
+    payload: data
+});
+
 

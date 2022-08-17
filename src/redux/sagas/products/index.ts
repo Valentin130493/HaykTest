@@ -1,19 +1,9 @@
-import {API_PRODUCTS} from "../../../constants/productApi";
-import {call, put} from "redux-saga/effects";
-import {getProductFailure, getProductSuccess} from "../../actions/productActions";
+import {all, takeLatest} from "redux-saga/effects";
+import {ProductActionTypes} from "../../actionTypes/productActionTypes";
+import productsSaga from "./products";
 
-
-const fetchProducts = async () => {
-    const res = await fetch(API_PRODUCTS)
-    return res.json()
-}
-
-
-export default function* productSaga(): any {
-    try {
-        const response = yield call(fetchProducts);
-        yield put(getProductSuccess(response))
-    } catch (error) {
-        yield put(getProductFailure(error));
-    }
+export default function* productSaga() {
+    yield all([
+        takeLatest(ProductActionTypes.GET_PRODUCT, productsSaga)
+    ])
 }

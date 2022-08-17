@@ -1,17 +1,14 @@
 import React from "react";
-import {LogIn} from "../components/LogIn/LogIn";
-
-
+import {LogIn, Registration} from "../components";
 import {useLocation} from "react-router-dom";
-import {routs} from "../constants/routs";
-import {Registration} from "../components/Registration/Registration";
-
+import {routes} from "../constants/routes";
 
 export const LoginPage = () => {
-    const location = useLocation()
+    const location = useLocation();
+
     return (
         <>
-            {location.pathname === routs.login ? <LogIn/> : <Registration/>}
+            {location.pathname === routes.login ?  <LogIn/> : <Registration/>}
         </>
     );
 };

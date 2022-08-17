@@ -1,7 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-import {ProductList} from "../components/ProductList/ProductList";
+import {Filters, ProductList} from "../components";
+import {useDispatch} from "react-redux";
+import {userLogOut} from "../redux/actions/loginActions";
+import {getProduct} from "../redux/actions/productActions";
 
 export const ProductsPage = () => {
-    return <ProductList/>;
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getProduct())
+    }, [])
+
+    const handleLogout = () => dispatch(userLogOut())
+
+    return <div>
+        <button onClick={handleLogout} >logout</button>
+        <Filters/>
+        <ProductList/>
+    </div>;
 };

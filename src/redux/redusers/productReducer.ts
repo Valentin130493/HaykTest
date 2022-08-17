@@ -1,42 +1,11 @@
-import {
-  GET_PRODUCT_FAILURE,
-  GET_PRODUCT_REQUEST,
-  GET_PRODUCT_SUCCESS,
-  SET_PRODUCTS
-} from "../actionTypes/productActionTypes";
-
-interface HoursItem {
-  closes_at:  string,
-  is_closed: boolean,
-  opens_at:  string,
-}
-
-export interface productItem {
-  address: string,
-  description: string,
-  hours: {
-    friday: HoursItem,
-    monday: HoursItem,
-    saturday: HoursItem,
-    sunday: HoursItem,
-    thursday: HoursItem,
-    tuesday: HoursItem,
-    wednesday: HoursItem,
-  },
-  id: number,
-  logo: string,
-  name: string,
-  phone_number: string,
-  review: string,
-  type: string,
-  uid: string,
-}
+import {ProductAction,ProductActionTypes} from "../actionTypes/productActionTypes";
+import {ProductItemI} from "../../models/products";
 
 interface ProductsState {
   loading: boolean,
   error: any,
-  products: Array<productItem>,
-  filteredProducts: Array<productItem>,
+  products: Array<ProductItemI>,
+  filteredProducts: Array<ProductItemI>,
   productTypes: Array<string>,
   filters: Array<string>
 }
@@ -50,32 +19,52 @@ const initialState: ProductsState = {
   filters: []
 }
 
-export default function productReducer(state = initialState, action:{type:string, payload:any}):ProductsState {
+export default function productReducer(state = initialState, action:ProductAction):ProductsState {
   switch (action.type) {
-    case GET_PRODUCT_REQUEST:
-      return {...state, loading: true}
-    case GET_PRODUCT_SUCCESS:
-      const typeList = action.payload.map((element: productItem) => element.type);
-      return {...state,
+    case ProductActionTypes.GET_PRODUCT:
+      return {
+        ...state,
+        loading: true
+      };
+    case ProductActionTypes.GET_PRODUCT_SUCCESS:
+      const typeList = action.payload!.map((element: ProductItemI) => element.type);
+
+      return {
+        ...state,
         loading: false,
-        products: action.payload,
+        products: action.payload!,
         productTypes: Array.from(new Set(typeList)),
         filters:[]
       }
-    case GET_PRODUCT_FAILURE:
-      return {...state,
+    case ProductActionTypes.GET_PRODUCT_FAILURE:
+      return {
+        ...state,
         loading: false,
         error: action.payload
       }
-    case SET_PRODUCTS:{
-      const indexProduct = state.filters.indexOf(action.payload.products)
-      return <ProductsState>{
+    case ProductActionTypes.FILTERED_PRODUCT:
+      const indexProduct = state.filters.indexOf(action.payload!.product)
+
+      state.filters.includes(action.payload!.product)
+          ? state.filters.splice(indexProduct, 1)
+          : state.filters.push(action.payload!.product)
+
+      state.products.forEach((product) => {
+        if (state.filters.includes(product.type)){
+          state.filteredProducts.push(product)
+        } else {
+          state.filteredProducts = []
+          state.products.forEach(product => state.filters.includes(product.type) && state.filteredProducts.push(product))
+        }})
+
+      if(!state.filters.length) state.filteredProducts = [];
+
+      state.filteredProducts = state.filteredProducts.filter((rest, index, self) =>
+          index === self.findIndex((element) => element.id === rest.id))
+
+      return {
         ...state,
-        filters: state.filters.includes(action.payload.products) ? state.filters.splice(indexProduct, 1) : state.filters?.push(action.payload.products),
-
       }
-    }
-
 
     default:
       return state

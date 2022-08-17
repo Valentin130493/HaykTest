@@ -1,13 +1,16 @@
 import {call, put} from "redux-saga/effects";
-import { firebaseCreateUser} from "../../../firebase/firebase";
-import {getProductFailure, getProductSuccess} from "../../actions/productActions";
+import {firebaseCreateUser} from "../../../firebase/firebase";
+import {
+    userRegisterFailure,
+    userRegisterSuccess
+} from "../../actions/loginActions";
+import {RegisterAction} from "../../actionTypes/loginActionTypes";
 
-export default function* registration(payload: any): any {
+export default function* registrationSaga({payload}: RegisterAction): any {
     try {
-        const response = yield call(()=>firebaseCreateUser(payload.email,payload.password));
-        console.log(response)
-        yield put(getProductSuccess(response))
+        const response = yield call(() => firebaseCreateUser(payload!.email, payload!.password));
+        yield put(userRegisterSuccess(response))
     } catch (error) {
-        yield put(getProductFailure(error));
+        yield put(userRegisterFailure(error));
     }
 }

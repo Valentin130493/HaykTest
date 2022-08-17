@@ -1,14 +1,14 @@
 import {all, takeLatest} from "redux-saga/effects";
-import login from "./logIn";
-import logOut from "./logOut";
-import registration from "./registration";
-import {LOGIN_REQUEST, LOGOUT_REQUEST, REGISTER_REQUEST} from "../../actionTypes/loginActionTypes";
+import logOutSaga from "./logOut";
+import registrationSaga from "./registration";
+import loginSaga from "./logIn";
+import {UserActionTypes} from "../../actionTypes/loginActionTypes";
 
 export default function* userSaga() {
     yield all([
-            takeLatest(LOGIN_REQUEST, login),
-            takeLatest(LOGOUT_REQUEST, logOut),
-            takeLatest(REGISTER_REQUEST, registration)
+            takeLatest(UserActionTypes.LOGIN, loginSaga),
+            takeLatest(UserActionTypes.LOGOUT, logOutSaga),
+            takeLatest(UserActionTypes.REGISTER, registrationSaga)
         ]
     )
 }

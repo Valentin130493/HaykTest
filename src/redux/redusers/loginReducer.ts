@@ -1,10 +1,4 @@
-import {
-  LOGIN_FAILURE,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS, LOGOUT_FAILURE,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS
-} from "../actionTypes/loginActionTypes";
+import { UserAction, UserActionTypes} from "../actionTypes/loginActionTypes";
 
 interface LoginState {
   loading: boolean,
@@ -13,7 +7,6 @@ interface LoginState {
   isAuthenticated: boolean
 }
 
-
 const initialState: LoginState = {
   userInfo: null,
   isAuthenticated: false,
@@ -21,25 +14,24 @@ const initialState: LoginState = {
   error: null
 };
 
-
-export default function loginReducer(state = initialState, action: { type: string, payload: any }) {
+export default function loginReducer(state = initialState, action: UserAction) {
   switch (action.type) {
-    case LOGIN_REQUEST :
+    case UserActionTypes.LOGIN:
       return {
         ...state,
-        loading: false,
+        loading: true,
         userInfo: null,
         isAuthenticated: false
       };
 
-    case LOGIN_SUCCESS:
+    case UserActionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         loading: false,
         userInfo: action.payload,
         isAuthenticated: true
       };
-    case LOGIN_FAILURE :
+    case UserActionTypes.LOGIN_FAILURE:
       return {
         ...state,
         loading: false,
@@ -47,12 +39,12 @@ export default function loginReducer(state = initialState, action: { type: strin
         error: action.payload
       };
 
-    case LOGOUT_REQUEST:
+    case UserActionTypes.LOGOUT:
       return {
         ...state,
         loading: true
       };
-    case LOGOUT_SUCCESS :
+    case UserActionTypes.LOGOUT_SUCCESS :
       return {
         ...state,
         loading: false,
@@ -60,7 +52,7 @@ export default function loginReducer(state = initialState, action: { type: strin
         userInfo: null
       };
 
-    case LOGOUT_FAILURE :
+    case UserActionTypes.LOGOUT_FAILURE:
       return {
         ...state,
         loading: false,
@@ -68,23 +60,23 @@ export default function loginReducer(state = initialState, action: { type: strin
         error: action.payload
       };
 
-    case REGISTER_REQUEST :
+    case UserActionTypes.REGISTER:
       return {
         ...state,
-        loading: false,
+        loading: true,
         userInfo: null,
         isAuthenticated: false
       };
 
-    case REGISTER_SUCCESS:
+    case UserActionTypes.REGISTER_SUCCESS:
       return {
         ...state,
         loading: false,
-        isAuthenticated: false,
-        userInfo: null
+        isAuthenticated: true,
+        userInfo: action.payload
       };
 
-    case REGISTER_FAILURE :
+    case UserActionTypes.REGISTER_FAILURE :
       return {
         ...state,
         loading: false,

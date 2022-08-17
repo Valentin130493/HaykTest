@@ -1,46 +1,51 @@
 import {
-    LOGIN_FAILURE,
-    LOGIN_REQUEST,
-    LOGIN_SUCCESS, LOGOUT_FAILURE,
-    LOGOUT_REQUEST,
-    LOGOUT_SUCCESS, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS
+    LoginAction,
+    LoginFailureAction,
+    LoginSuccessAction,
+    LogoutAction,
+    LogoutFailureAction,
+    LogoutSuccessAction,
+    RegisterAction,
+    RegisterFailureAction,
+    RegisterSuccessAction,
+    UserActionTypes
 } from "../actionTypes/loginActionTypes";
 
-export const userLoginRequest = (data: {email:string, password:string}) => ({
-    type: LOGIN_REQUEST,
-    payload: data
+export const userLogin = (data: { email:string, password:string }): LoginAction => ({
+    type: UserActionTypes.LOGIN,
+    payload: data,
 });
-export const userLoginSuccess = (userInfo: any) => ({
-    type: LOGIN_SUCCESS,
+export const userLoginSuccess = (userInfo: any): LoginSuccessAction => ({
+    type: UserActionTypes.LOGIN_SUCCESS,
     payload: userInfo
 });
-export const userLoginFailure = (error: unknown) => ({
-    type: LOGIN_FAILURE,
+export const userLoginFailure = (error: any): LoginFailureAction => ({
+    type: UserActionTypes.LOGIN_FAILURE,
     payload: error
 });
 
-export const userLogOutRequest = () => ({
-    type: LOGOUT_REQUEST
+export const userLogOut = (): LogoutAction => ({
+    type: UserActionTypes.LOGOUT
 });
-export const userLogOutSuccess = () => ({
-    type: LOGOUT_SUCCESS
+export const userLogOutSuccess = (): LogoutSuccessAction => ({
+    type: UserActionTypes.LOGOUT_SUCCESS
 
 });
-export const userLogOutFailure = (error: unknown) => ({
-    type: LOGOUT_FAILURE,
-    payload: error
+export const userLogOutFailure = (): LogoutFailureAction => ({
+    type: UserActionTypes.LOGOUT_FAILURE,
 });
 
-export const userRegisterRequest = (data: {email:string, password:string}) => ({
-    type: REGISTER_REQUEST,
-    payload: data
+export const userRegister = (data: {email:string, password:string}): RegisterAction => ({
+    type: UserActionTypes.REGISTER,
+    payload: data,
 });
 
-export const userRegisterSuccess = () => ({
-    type: REGISTER_SUCCESS
+export const userRegisterSuccess = (userInfo: any): RegisterSuccessAction => ({
+    type: UserActionTypes.REGISTER_SUCCESS,
+    payload: userInfo
 });
 
-export const userRegisterFailure = (error: unknown) => ({
-    type: REGISTER_FAILURE,
+export const userRegisterFailure = (error: any): RegisterFailureAction => ({
+    type: UserActionTypes.REGISTER_FAILURE,
     payload: error
 });
